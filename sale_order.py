@@ -5,6 +5,8 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    name = fields.Char(string='Order Reference', required=True, copy=False, readonly=True, default='New')
+
     is_booking_order = fields.Boolean(string='Is Booking Order')
     team_id = fields.Many2one(comodel_name='service.team', string='Team', ondelete='restrict')  # Added ondelete to handle relational integrity
     team_leader_id = fields.Many2one(comodel_name='res.users', string='Team Leader')
@@ -51,6 +53,13 @@ class SaleOrder(models.Model):
                 return {
                     'warning': {
                         'title': "Team Unavailable",
-                        'message': "Team already has a work order during that period on SO{self.name}"
+                        'message': "Team already has a work order during that period on SO {self.name}"
+                    }
+                }
+            else:
+                return {
+                    'info': {
+                        'title': "Team Available",
+                        'message': "Team is available for booking"
                     }
                 }
