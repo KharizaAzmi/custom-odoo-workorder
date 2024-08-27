@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <report
+            id="report_workorder_menu"
+            string="Work Order"
+            model="work.order"
+            report_type="qweb-pdf"
+            file="work.work_order_report"
+            name="work.work_order_report"
+        />
+
+        <template id="work_order_report">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="work.work_order_report_document"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="work_order_report_document">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <h2>WORK ORDER: <span t-field="doc.name"/></h2>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>Team Name</td>
+                            <td><span t-field="doc.team_id"/></td>
+                            <td>Customer Name</td>
+                            <td><span t-field="doc.partner_id"/></td>
+                        </tr>
+                        <tr>
+                            <td>Booking Order Ref</td>
+                            <td><span t-field="doc.booking_order_id"/></td>
+                            <td>Date</td>
+                            <td><span t-field="doc.date_start"/> - <span t-field="doc.date_end"/></td>
+                        </tr>
+                        <tr>
+                            <td>Notes</td>
+                            <td colspan="3"><span t-field="doc.notes"/></td>
+                        </tr>
+                    </table>
+                    
+                    <div style="margin-top: 50px; text-align: center;">
+                        <span>                          </span><br/>
+                        <span>__________________________</span><br/>
+                        <span>Signature</span>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

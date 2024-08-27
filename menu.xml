@@ -1,0 +1,54 @@
+<odoo>
+	<data>
+		<record id="action_service_team" model="ir.actions.act_window">
+			<field name="name">Daftar Service Team</field>
+			<field name="res_model">service.team</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click to add a new team</p>
+				<p>Klik tombol untuk bikin team baru</p>
+			</field>
+		</record>
+
+		<record id="action_sale_order" model="ir.actions.act_window">
+			<field name="name">Daftar sale order</field>
+			<field name="res_model">sale.order</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click to add a new order</p>
+				<p>Klik tombol untuk bikin sale order baru</p>
+			</field>
+		</record>
+
+		<record id="action_work_order" model="ir.actions.act_window">
+			<field name="name">Daftar work order</field>
+			<field name="res_model">work.order</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click to add a new work</p>
+				<p>Klik tombol untuk bikin work order baru</p>
+			</field>
+		</record>
+
+		<menuitem id="order_0" name="Order" sequence="20" />
+		<menuitem id="order_1" name="Order" parent="order_0" sequence="20" />
+		<menuitem 
+            id="menu_service_team" 
+            name="Service Team" 
+            parent="order_1" 
+            action="action_service_team" 
+            sequence="20" />
+		<menuitem
+			id="menu_sale_order"
+			name="Sale Order"
+			parent="order_1"
+			action="action_sale_order"
+			sequence="20"/>
+		<menuitem
+			id="menu_work_order"
+			name="Work Order"
+			parent="order_1"
+			action="action_work_order"
+			sequence="20"/>
+	</data>
+</odoo>

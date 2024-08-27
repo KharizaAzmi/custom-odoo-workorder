@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_work_order_tree" model="ir.ui.view">
+            <field name="name">work.order.tree</field>
+            <field name="model">work.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Work Orders">
+                    <field name="name"/>
+                    <field name="team_id"/>
+                    <field name="booking_order_name" string="Booking Order Reference"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_work_order_form" model="ir.ui.view">
+            <field name="name">view.work.order.form</field>
+            <field name="model">work.order</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Work Order">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="pending,progress,done,cancelled"/>
+                        <button string="Set to Pending" type="object" name="action_set_pending" states="draft" class="oe_highlight"/>
+                        <button string="Set to In Progress" type="object" name="action_set_progress" states="pending" class="oe_highlight"/>
+                        <button string="Set to Done" type="object" name="action_set_done" states="progress" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="action_cancel" states="draft,pending,progress" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                                <field name="team_id" widget="many2one" string="Team"/>
+                            </group>
+                            <group>
+                                <field name="booking_order_id" string="Booking Order Reference" readonly="1"/>
+                                <field name="planned_start"/>
+                                <field name="planned_end"/>
+                                <field name="date_start" readonly="1"/>
+                                <field name="date_end" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Team Details">
+                                <group>
+                                    <field name="team_leader_id"/>
+                                    <field name="team_members_ids" widget="many2many_tags"/>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Sequence -->
+        <record id="seq_work_order" model="ir.sequence">
+            <field name="name">Work Order Sequence</field>
+            <field name="code">work.order</field>
+            <field name="prefix">WO</field>
+            <field name="padding">3</field>
+            <field name="number_next_actual">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>
